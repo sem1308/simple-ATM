@@ -156,7 +156,7 @@ class ATM:
         print("\n========= CARD UI =========")
         # wait card inserted
         while True :
-            if self.wait_insert_card : break
+            if self.wait_insert_card() : break
         self.card_info = self.read_card()
 
     def enter_pin_num(self):

@@ -6,7 +6,7 @@ class CARD:
     def __init__(self, cards):
         self.cards = cards
 
-    def validate_card_num(self, card_num):
+    def validate_card_num(self, card_num : str):
         # TODO: change this code for real card service
         # check digit
         if not card_num.isdigit():
@@ -31,7 +31,7 @@ class CARD:
 
         return total % 10 == 0
 
-    def validate_card_thru(self, card_num, valid_thru: list):
+    def validate_card_thru(self, card_num: str, valid_thru: list):
         if valid_thru != self.cards[card_num]["valid_thru"] : return False
         now = datetime.datetime.now()
         cur_year = now.year - 2000
