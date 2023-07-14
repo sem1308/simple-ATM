@@ -31,7 +31,8 @@ class CARD:
 
         return total % 10 == 0
 
-    def validate_card_thru(self, valid_thru: list):
+    def validate_card_thru(self, card_num, valid_thru: list):
+        if valid_thru != self.cards[card_num]["valid_thru"] : return False
         now = datetime.datetime.now()
         cur_year = now.year - 2000
         cur_month = now.month
