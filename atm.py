@@ -96,9 +96,9 @@ class ATM:
         self.account, is_lack = self.bank.withdraw(self.account["account_num"], amount)
 
         if is_lack :
-            print("withdrawl denied due to 'lack of balance'")
+            print("\nwithdrawl denied due to 'lack of balance'")
         else:
-            print(f"{amount}$ was withdrawn from {self.account['account_num']}")
+            print(f"\n{amount}$ was withdrawn from {self.account['account_num']}")
             self.money -= amount
         print("===== after balance =====")
         self.see_balance()
@@ -109,7 +109,7 @@ class ATM:
 
     ### main menu ###
     def show_main_menu(self):
-        print("=== ATM ===")
+        print("\n========= ATM =========")
         for menu in MainMenu:
             print(f"[{menu.value}] {menu.name}")
         print("select wanted num : ", end='')
@@ -135,7 +135,7 @@ class ATM:
             return
 
         valid_thru = input("Enter valid thru (ex 11/23) : ").split('/')
-        if not self.card.validate_card_thru(valid_thru) :
+        if not self.card.validate_card_thru(card_num,valid_thru) :
             print("card is not valid")
             return
 
@@ -174,11 +174,15 @@ class ATM:
         print("\n========= ACCOUNTS UI =========")
         for i, account in enumerate(self.accounts_info):
             print(f"[{i}] - {bank_dict[account['bank_num']]} , {account['account_num']}")
+        print("[any else button] : exit")
         print("select wanted num : ", end='')
 
     def select_account(self):
-        choice = int(input_by_ui())
-        self.account = self.accounts_info[choice]
+        try:
+            choice = int(input_by_ui())
+            self.account = self.accounts_info[choice]
+        except:
+            self.is_return_to_home = True
 
     def routine(self):
         self.init()
@@ -199,6 +203,7 @@ class ATM:
         self.set_accounts()
         self.show_accounts()
         self.select_account()
+        if self.is_return_to_home : return
         # select function
         while True:
             self.show_account_menu()
